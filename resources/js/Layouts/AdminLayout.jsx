@@ -2,6 +2,18 @@ import { Link } from "@inertiajs/react";
 import React from "react";
 
 const AdminLayout = ({ children }) => {
+
+    const handleLogout = async () => {
+        try {
+            // Kirim permintaan POST ke rute logout di server
+            await axios.post('/logout');
+
+
+        } catch (error) {
+            // Tangani kesalahan jika terjadi
+            console.error('Error logging out:', error);
+        }
+    }
     return (
         <>
             <header className="bg-black text-white py-8">
@@ -16,7 +28,7 @@ const AdminLayout = ({ children }) => {
                                 <Link href="/dashboard">Dashboard</Link>
                             </div>
 
-                            <div>user</div>
+                            <button onClick={handleLogout}>Logout</button>
                         </nav>
                     </div>
                 </div>

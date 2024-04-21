@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
 use Illuminate\Foundation\Application;
@@ -26,6 +27,15 @@ Route::get('/', function () {
         'phpVersion' => PHP_VERSION, // Versi PHP yang digunakan
     ]);
 });
+
+// Rute untuk halaman login
+Route::get('/login', [AuthenticatedSessionController::class, 'create'])->name('login');
+
+// Rute untuk menangani proses login
+Route::post('/login', [AuthenticatedSessionController::class, 'store']);
+
+// Rute untuk logout
+Route::post('/logout', [AuthenticatedSessionController::class, 'destroy'])->name('logout');
 
 // Rute untuk menampilkan daftar pengguna
 Route::get('/users', [UserController::class, 'index'])->name('users.index');
